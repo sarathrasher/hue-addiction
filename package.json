@@ -1,0 +1,26 @@
+{
+  "name": "hue-addiction",
+  "version": "1.0.0",
+  "description": "A color blending game for aspiring artists and designers that allows them to test out their color blending skills in a fast-paced, fun, virtual environment.",
+  "main": "secrets.default.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smuntean/hue-addiction.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smuntean/hue-addiction/issues"
+  },
+  "homepage": "https://github.com/smuntean/hue-addiction#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "pg-promise": "^8.4.6"
+  }
+}
