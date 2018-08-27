@@ -1,54 +1,25 @@
-.contents {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
-
-.login-card {
-  display: flex;
-  margin: 0 auto;
-  width: 90%;
-  max-width: 30em;
-  height: 20em;
-  box-shadow: var(--shadow);
-}
-
 .login-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-  padding: 1rem;
+  margin: 3em auto;
+  max-width: 30em;
+  border: solid 0.3em var(--dk-blue);
 }
 
-.login-email {
-  margin-left: 3rem;
-}
-
-.login-password {
-  margin-left: 3rem;
-}
-
-.login-email-input {
-  height: 1.5rem;
-  width: 12rem;
-  box-shadow: var(--shadow);
-}
-
-.login-password-input {
-  height: 1.5rem;
-  width: 12rem;
-  box-shadow: var(--shadow);
+.login-email, .login-password {
+  margin: 1em;
+  outline: solid 0.1em var(--dk-blue);
+  font-size: 1.25rem;
 }
 
 .submit {
-  padding: 0.6rem 0.6rem;
+  margin: 1em;
+  padding: 0.3em 0.6em;
+  font-size: 1.25rem;
+  color: #FFF;
   text-decoration: none;
   border: 0;
   cursor: pointer;
-  color: var(--light);
-  background: var(--dark);
-  box-shadow: var(--shadow);
+  background: var(--dk-blue);
 }
