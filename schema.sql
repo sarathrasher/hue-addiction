@@ -12,6 +12,6 @@ CREATE TABLE decoy_colors (
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  email VARCHAR(50) UNIQUE,
-  user_password VARCHAR(10) UNIQUE
+  email VARCHAR(255) UNIQUE,
+  user_password VARCHAR(255)
 );
