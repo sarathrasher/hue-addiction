@@ -9,3 +9,9 @@ CREATE TABLE decoy_colors (
   level VARCHAR(255) NOT NULL,
   decoy_color VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(50) UNIQUE,
+  user_password VARCHAR(10) UNIQUE
+);
