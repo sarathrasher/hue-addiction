@@ -1,0 +1,58 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --primary: #ddd;
+  --dark: #333;
+  --light: #fff;
+  --dk-blue: rgb(84, 84, 145);
+}
+
+.title {
+  color: var(--dk-blue);
+  text-align: center;
+  font-size: 3em;
+  text-transform: capitalize;
+}
+
+.nav {
+  margin: 0;
+  width: 100%;
+  height: 3rem;
+  background: rgb(84, 84, 145);
+}
+
+.nav-list {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-item {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: rgb(84, 84, 145);
+  box-shadow: var(--shadow);
+  width: 8em;
+  height: 1.5em;
+  line-height: 1.5em;
+  text-align: center;
+  background: white;
+  margin: 0 1em;
+}
+
+.nav-link {
+  text-decoration: none;
+}
