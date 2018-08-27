@@ -1,0 +1,37 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 15em 0 15em;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.mixed-color {
+  background-color: green;
+  width: 100%;
+}
+
+.play-color-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%
+}
+
+.play-color {
+  background-color: red;
+  width: 50%;
+  height: 50%;
+  margin: 1em;
+}
+
+@media (min-width: 720px) {
+  .game {
+    margin: 0 10em 0 10em;
+  }
+}
