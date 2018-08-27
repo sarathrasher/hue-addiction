@@ -1,0 +1,2 @@
+username = '';
+module.exports = {username}
