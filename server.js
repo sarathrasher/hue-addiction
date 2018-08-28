@@ -7,12 +7,18 @@ const dbConfig = 'postgres://' + secrets.username +'@localhost:5432/hue-addictio
 const db = pg(dbConfig);
 
 let getLevelData = (req, res) => {
-  db.query(`SELECT DISTINCT solution_color, decoy_color
+  let promise1 = db.query(`SELECT DISTINCT solution_color
   FROM 
-    solution_colors, decoy_colors
+    solution_colors
   WHERE
-    solution_colors.level = '${req.params.id}' and decoy_colors.level = '${req.params.id}';`)
-  .then(data => {
+    solution_colors.level = '${req.params.id}';`)
+  let promise2 = db.query(`SELECT DISTINCT decoy_color
+    FROM 
+      decoy_colors
+    WHERE
+      decoy_colors.level = '${req.params.id}';`)
+  Promise.all([promise1, promise2])
+    .then(data => {
     console.log(data);
     res.send(data);
   })
