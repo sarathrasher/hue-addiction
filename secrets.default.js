@@ -1,3 +1,3 @@
 username = '';
-signature = '';
-module.exports = {username, signature}
+password = '';
+module.exports = {username, password}
