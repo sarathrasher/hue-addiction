@@ -7,10 +7,7 @@ playColors.forEach((playColor, i) => {
 color_1 = $.Color('red');
 color_2 = $.Color('blue');
 
-result_color = Color_mixer.mix(color_1,color_2);
-console.log(result_color);
-
-console.log(result_color.toHexString());
+document.querySelector('.mixed-color').style.backgroundColor = Color_mixer.mix(color_1,color_2).toHexString();
 
 // target elements with the "draggable" class
 interact('.play-color')
