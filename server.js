@@ -1,10 +1,15 @@
-const secrets = require('./secrets')
-const express = require('express');
-const bodyParser = require('body-parser');
+const {createUser, validateToken} = require('./routes/login');
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const pg = require('pg-promise')();
-const dbConfig = 'postgres://' + secrets.username +'@localhost:5432/hue-addiction';
-const db = pg(dbConfig);
+const router =  new express.Router();
+const db = require('./database');
+const authorization = require('./routes/authorize')
+
+app.use(express.static("public"));
+app.use(bodyParser.json());
+app.use(router);
+app.use(validateToken,authorization);
 
 let getLevelData = (req, res) => {
   let promise1 = db.query(`SELECT DISTINCT solution_color
@@ -28,8 +33,6 @@ let getLevelData = (req, res) => {
   });
 }
 
-app.use(bodyParser.json());
-app.use(express.static('public'));
 app.get('/level_data/:id', getLevelData)
-
+router.post("/users", createUser);
 app.listen(3000);
