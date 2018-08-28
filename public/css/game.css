@@ -27,6 +27,8 @@
 }
 
 .play-color {
+  -ms-touch-action: none;
+  touch-action: none;
   background-color: red;
   width: 30vh;
   height: 30vh;
