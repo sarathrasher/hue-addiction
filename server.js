@@ -9,7 +9,24 @@ const authorization = require('./routes/authorize')
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(router);
-app.use(validateToken,authorization);
+// app.use(validateToken,authorization);
+
+let formatData = (data) => {
+  let solutionColors = []
+  let decoyColors = []
+  data[0].forEach(colorObject => {
+    let solutionColor = colorObject.solution_color
+    solutionColors.push(solutionColor)
+  });
+  data[1].forEach(colorObject => {
+    let decoyColor = colorObject.decoy_color
+    decoyColors.push(decoyColor)
+  });
+  let levelData = {solutionColors, decoyColors}
+
+  return levelData
+  
+}
 
 let getLevelData = (req, res) => {
   let promise1 = db.query(`SELECT DISTINCT solution_color
@@ -24,8 +41,9 @@ let getLevelData = (req, res) => {
       decoy_colors.level = '${req.params.id}';`)
   Promise.all([promise1, promise2])
     .then(data => {
-    console.log(data);
-    res.send(data);
+    let formattedData = formatData(data);
+    console.log(formattedData);
+    res.send(formattedData);
   })
   .catch(err => {
     console.log(err)
