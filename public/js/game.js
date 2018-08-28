@@ -65,7 +65,6 @@ interact('.play-color').dropzone({
     console.log('dragged in');
   },
   ondrop: function (event) {
-    event.relatedTarget.textContent = 'Dropped';
     let color_1 = $.Color(event.relatedTarget.style.backgroundColor);
     let color_2 = $.Color(event.target.style.backgroundColor);
     let result_color = Color_mixer.mix(color_1,color_2);
