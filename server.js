@@ -1,12 +1,17 @@
-const secrets = require('./secrets')
-const express = require('express');
-const bodyParser = require('body-parser');
+const {createUser, validateToken} = require('./public/js/login');
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const pg = require('pg-promise')();
-const dbConfig = 'postgres://' + secrets.username +'@localhost:5432/hue-addiction';
-const db = pg(dbConfig);
+const router =  new express.Router();
+const db = require('./public/js/database');
+const authorization = require('./public/js/authorize')
 
+app.use(express.static("public"));
 app.use(bodyParser.json());
-app.use(express.static('public'));
 
+app.use(router);
+app.use(validateToken,authorization);
+router.post("/users", createUser);
 app.listen(3000);
+
+module.exports = db;
