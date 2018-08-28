@@ -3,16 +3,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 15em 0 15em;
-  height: 100%;
   position: absolute;
+  width: 100%;
+  height: 100%;
   top: 0;
-  bottom: 0;
+  left: 0;
+  margin-top: 1em;
 }
 
 .mixed-color {
   background-color: green;
-  width: 100%;
+  width: 16em;
+  height: 30%;
 }
 
 .play-color-container {
@@ -20,18 +22,53 @@
   flex-direction: row;
   flex-wrap: wrap;
   height: 100%;
-  width: 100%
+  width: 100%;
+  justify-content: center
 }
 
 .play-color {
   background-color: red;
-  width: 50%;
-  height: 50%;
+  width: 7em;
+  height: 7em;
   margin: 1em;
 }
 
-@media (min-width: 720px) {
-  .game {
-    margin: 0 10em 0 10em;
+@media (min-width: 425px) {
+  .mixed-color {
+    width: 22em;
+  }
+  .play-color {
+    width: 10em;
+    height: 10em;
+  }
+}
+
+@media (min-width: 768px) {
+  .mixed-color {
+    width: 32em;
+  }
+  .play-color {
+    width: 15em;
+    height: 15em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mixed-color {
+    width: 42em;
+  }
+  .play-color {
+    width: 20em;
+    height: 20em;
+  }
+}
+
+@media (min-width: 1440px) {
+  .mixed-color {
+    width: 60em;
+  }
+  .play-color {
+    width: 29em;
+    height: 29em;
   }
 }
