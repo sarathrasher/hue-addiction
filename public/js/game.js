@@ -4,6 +4,14 @@ playColors.forEach((playColor, i) => {
   playColor.style.backgroundColor = colors[i];
 });
 
+color_1 = $.Color('red');
+color_2 = $.Color('blue');
+
+result_color = Color_mixer.mix(color_1,color_2);
+console.log(result_color);
+
+console.log(result_color.toHexString());
+
 // target elements with the "draggable" class
 interact('.play-color')
   .draggable({
@@ -61,6 +69,11 @@ interact('.play-color').dropzone({
   },
   ondrop: function (event) {
     event.relatedTarget.textContent = 'Dropped';
+    let color_1 = $.Color(event.relatedTarget.style.backgroundColor);
+    let color_2 = $.Color(event.target.style.backgroundColor);
+    let result_color = Color_mixer.mix(color_1,color_2);
+    event.target.style.backgroundColor = result_color.toHexString();
+    event.relatedTarget.classList.add('hidden');
   },
   ondropdeactivate: function (event) {
     // remove active dropzone feedback
