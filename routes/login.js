@@ -1,6 +1,6 @@
-const db = require("./database");
+const db = require("../database");
 const jwt = require("jsonwebtoken");
-const password = "00607";
+const {password} = require('../secrets');
 
 let createUser = (req, res, next) => {
   let newUser = {
