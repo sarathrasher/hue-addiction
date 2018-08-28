@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/login.css">
+  <link rel="stylesheet" href="./css/instructions.css">
   <link rel="stylesheet" href="./css/game.css">
   <title>Color Addiction</title>
 </head>
@@ -23,12 +24,16 @@
     </nav>
   </header>
   <div class="contents">
-        <form class="login-form" action="">
+    <form class="login-form hidden" action="">
       <input class="login-email" type="email" placeholder="Email" required>
       <input class="login-password" type="password" placeholder="Password" required>
-      <input class="submit" type="submit" value="Log In">
+      <input class="submit button" type="submit" value="Log In">
     </form>
-    <div class="game">
+    <div class="instructions">
+      <h3 class="instructions-header">Drag and Drop Color Squares to Match the Top Color</h3>
+      <div class="start-button button">Click Here To Play</div>
+    </div>
+    <div class="game hidden">
       <div class="mixed-color">
       </div>
       <div class="play-color-container">
