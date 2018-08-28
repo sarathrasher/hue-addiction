@@ -1,2 +1,4 @@
 username = '';
-module.exports = {username}
+signature = {}
+
+module.exports = {username, signature}
