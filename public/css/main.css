@@ -68,5 +68,5 @@ body {
   justify-content: flex-start;
   width: 100%;
   flex: 1;
-  /* position: relative; */
+  position: relative;
 }
