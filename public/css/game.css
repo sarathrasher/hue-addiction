@@ -13,8 +13,8 @@
 
 .mixed-color {
   background-color: green;
-  width: 16em;
-  height: 30%;
+  width: 62vh;
+  height: 30vh;
 }
 
 .play-color-container {
@@ -28,12 +28,12 @@
 
 .play-color {
   background-color: red;
-  width: 7em;
-  height: 7em;
-  margin: 1em;
+  width: 30vh;
+  height: 30vh;
+  margin: 1vh;
 }
 
-@media (min-width: 425px) {
+/* @media (min-width: 425px) {
   .mixed-color {
     width: 22em;
   }
@@ -41,9 +41,9 @@
     width: 10em;
     height: 10em;
   }
-}
+} */
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .mixed-color {
     width: 32em;
   }
@@ -71,4 +71,4 @@
     width: 29em;
     height: 29em;
   }
-}
+} */
