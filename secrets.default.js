@@ -1,3 +1,3 @@
-username = '';
+databaseURL = '';
 password = '';
-module.exports = {username, password}
+module.exports = {databaseURL, password}

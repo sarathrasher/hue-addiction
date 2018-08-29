@@ -62,6 +62,7 @@ publicRouter.post('/login', loginUser);
 authRouter.use(validateToken);
 
 authRouter.get('/level_data/:id', getLevelData)
+
 app.use(express.static("public"));
 app.use(allowCORS);
 app.use(publicRouter);

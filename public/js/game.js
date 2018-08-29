@@ -23,18 +23,19 @@ fetch('http://localhost:3000/api/level_data/1', {headers: {authorization: getTok
       iArr.push(i);
       j++;
     }
-  }
-  while (iArr.length < data.solutionColors.length + data.decoyColors.length) {
-    i = Math.floor(Math.random() * (data.solutionColors.length + data.decoyColors.length));
-    if (!iArr.includes(i)){
-      playColors[i].style.backgroundColor = data.decoyColors[i];
-      iArr.push(i);
+    while (iArr.length < data.solutionColors.length + data.decoyColors.length) {
+      i = Math.floor(Math.random() * (data.solutionColors.length + data.decoyColors.length));
+      if (!iArr.includes(i)){
+        playColors[i].style.backgroundColor = data.decoyColors[i];
+        iArr.push(i);
+      }
     }
-  }
-  let color_1 = $.Color(data.solutionColors[0]);
-  let color_2 = $.Color(data.solutionColors[1]);
-  document.querySelector('.mixed-color').style.backgroundColor = Color_mixer.mix(color_1, color_2).toHexString();
-});
+    let color_1 = $.Color(data.solutionColors[0]);
+    let color_2 = $.Color(data.solutionColors[1]);
+    document.querySelector('.mixed-color').style.backgroundColor = Color_mixer.mix(color_1, color_2).toHexString();
+  });
+}
+getLevelData(level);
 
 // target elements with the "draggable" class
 interact('.play-color')
@@ -90,19 +91,34 @@ interact('.play-color').dropzone({
     draggableElement.classList.add('can-drop');
   },
   ondrop: function (event) {
-    if (event.target.getAttribute('data-target') &&
-    event.relatedTarget.getAttribute('data-target')) {
+    let resetElement = (element => {
+      element.style.transform = 'translate(0px, 0px)';
+      element.setAttribute('data-x', 0);
+      element.setAttribute('data-y', 0);
+    })
+    if (event.target.getAttribute('data-target') === 'true' &&
+    event.relatedTarget.getAttribute('data-target') === 'true') {
       // Insert Game logic for correct answer
       let color_1 = $.Color(event.relatedTarget.style.backgroundColor);
       let color_2 = $.Color(event.target.style.backgroundColor);
       let result_color = Color_mixer.mix(color_1,color_2);
       event.target.style.backgroundColor = result_color.toHexString();
       event.relatedTarget.classList.add('hidden');
+      event.target.setAttribute('data-target', false)
+      event.relatedTarget.setAttribute('data-target', false)
+      setTimeout(() => {
+        level++;
+        if (level > 4) {
+          console.log('Game over.');
+          return;
+        }
+        getLevelData(level);
+        resetElement(event.relatedTarget);
+        event.relatedTarget.classList.remove('hidden');
+      }, 1000);
     } else {
       // Insert Game logic for wrong answer
-      event.relatedTarget.style.transform = 'translate(0px, 0px)';
-      event.relatedTarget.setAttribute('data-x', 0);
-      event.relatedTarget.setAttribute('data-y', 0);
+      resetElement(event.relatedTarget);
     }
   },
   ondropdeactivate: function (event) {
