@@ -60,7 +60,7 @@ publicRouter.post("/users", createUser);
 publicRouter.post('/login', loginUser);
 authRouter.use(validateToken,authorization);
 
-app.get('/level_data/:id', getLevelData)
+app.get('/level_data/:id', getLevelData);
 app.use(express.static("public"));
 app.use(allowCORS);
 app.use(publicRouter);

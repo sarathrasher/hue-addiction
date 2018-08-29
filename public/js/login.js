@@ -14,7 +14,7 @@ let createUser = (event) => {
   let password = document.querySelector('.login-password').value;
   console.log(password);
   let data ={email: email, user_password: password};
-  fetch('http://localhost:3000/users', {
+  fetch('/users', {
     method: "POST", 
         cache: "no-cache", 
         credentials: "same-origin", 

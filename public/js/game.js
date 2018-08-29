@@ -1,6 +1,6 @@
 let playColors = document.querySelectorAll('.play-color');
 
-fetch('http://localhost:3000/level_data/1')
+fetch('/level_data/1')
 .then(res => res.json())
 .then(data => {
   let i;
