@@ -23,6 +23,7 @@ let createUser = (req, res, next) => {
 
 let validateToken = async (req, res, next) => {
   let token = req.headers.token;
+  console.log(token);
   let payload;
   try {
     payload = await jwt.verify(token, password);

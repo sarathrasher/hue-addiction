@@ -24,7 +24,8 @@ let createUser = (event) => {
         body: JSON.stringify(data),
   })
   .then(response => {
-      console.log(response);
+    loginForm.reset()
+    console.log(response);
   })
 }
 
@@ -38,7 +39,7 @@ let loginUser = (event) => {
         cache: "no-cache", 
         credentials: "same-origin", 
         headers: {
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
         redirect: "follow", 
         referrer: "no-referrer", 
@@ -46,7 +47,10 @@ let loginUser = (event) => {
   })
   .then(response => {
       response.text().then(token => {
+        console.log(token);
         localStorage.setItem("token", token);
+        loginForm.reset();
+        // getLevelData function
       })
   })
 }

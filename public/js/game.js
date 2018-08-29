@@ -1,8 +1,12 @@
 let playColors = document.querySelectorAll('.play-color');
 
-fetch('http://localhost:3000/level_data/1')
+let getToken = () => localStorage.getItem("token");
+
+
+fetch('http://localhost:3000/api/level_data/1', {headers: {authorization: getToken()}})
 .then(res => res.json())
 .then(data => {
+  console.log(data);
   let i;
   let iArr = [];
   // eventually we will want to create play-color elements in these while loops
