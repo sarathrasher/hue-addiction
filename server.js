@@ -1,15 +1,11 @@
-const {createUser, validateToken} = require('./routes/login');
+const {createUser, validateToken, loginUser} = require('./routes/login');
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const router =  new express.Router();
+const authRouter =  new express.Router();
+const publicRouter = new express.Router();
 const db = require('./database');
 const authorization = require('./routes/authorize')
-
-app.use(express.static("public"));
-app.use(bodyParser.json());
-app.use(router);
-// app.use(validateToken,authorization);
 
 let formatData = (data) => {
   let solutionColors = []
@@ -24,8 +20,7 @@ let formatData = (data) => {
   });
   let levelData = {solutionColors, decoyColors}
 
-  return levelData
-  
+  return levelData 
 }
 
 let getLevelData = (req, res) => {
@@ -51,6 +46,14 @@ let getLevelData = (req, res) => {
   });
 }
 
+app.use(bodyParser.json());
+
+publicRouter.post("/users", createUser);
+publicRouter.post('/login', loginUser);
+authRouter.use(validateToken,authorization);
+
 app.get('/level_data/:id', getLevelData)
-router.post("/users", createUser);
+app.use(express.static("public"));
+app.use(publicRouter);
+app.use(authRouter);
 app.listen(3000);
