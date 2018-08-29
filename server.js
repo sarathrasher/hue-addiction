@@ -58,7 +58,7 @@ app.use(bodyParser.json());
 
 publicRouter.post("/users", createUser);
 publicRouter.post('/login', loginUser);
-authRouter.use(validateToken,authorization);
+authRouter.use(validateToken);
 
 app.get('/level_data/:id', getLevelData)
 app.use(express.static("public"));

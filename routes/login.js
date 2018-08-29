@@ -3,12 +3,11 @@ const jwt = require("jsonwebtoken");
 const {password} = require('../secrets');
 
 let createUser = (req, res, next) => {
-  debugger
   let newUser = {
     email: req.body.email,
     password: req.body.user_password
   };
-  db.query(
+  db.one(
     `INSERT INTO users (email, user_password) 
     VALUES ($1, $2)
     RETURNING *;`,
@@ -48,7 +47,7 @@ let loginUser = (req, res, next) => {
     email: req.body.email,
     password: req.body.user_password
   };
-  db.query(
+  db.one(
     `SELECT 
       email, user_password
     FROM
@@ -58,7 +57,6 @@ let loginUser = (req, res, next) => {
     [userInput.email, userInput.password]
   )
     .then(data => {
-      console.log(data);
       let token = jwt.sign({ id: data.id }, password, { expiresIn: "1d" });
       res.send(token);
     })
