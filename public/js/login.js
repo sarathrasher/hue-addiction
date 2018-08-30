@@ -25,7 +25,6 @@ let createUser = (event) => {
   })
   .then(response => {
     loginForm.reset()
-    console.log(response);
     getLevelData(level);
     showInstructions();
   })
@@ -49,7 +48,6 @@ let loginUser = (event) => {
   })
   .then(response => {
       response.text().then(token => {
-        console.log(token);
         localStorage.setItem("token", token);
         loginForm.reset();
         getLevelData(level);
@@ -58,6 +56,40 @@ let loginUser = (event) => {
   })
 }
 
+//check to see if values in object are empty.
+let validateUser = (user) => {
+  if(user.email && user.user_password) {
+    return true;
+  }
+  return false;
+};
+
+let automaticSignIn = () => {
+  let checkUser;
+  if(localStorage.getItem("token")) {
+    checkUser = localStorage.getItem("token");
+    fetch(`/signedin`, {
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        "token": checkUser
+      }
+    })
+    .then(response => 
+        response.text())
+    .then(message => {
+      if(message === 'is user') {
+          loginForm.classList.remove("hidden");
+      }
+      else {
+        loginForm.reset();
+        getLevelData(level);
+        showInstructions(); 
+      }
+    })
+  }  
+}
 createButton.addEventListener('click', createUser);
 loginButton.addEventListener('click', loginUser);
+automaticSignIn();
 

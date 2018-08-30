@@ -7,6 +7,7 @@ const router = new express.Router();
 const authRouter =  new express.Router();
 const publicRouter = new express.Router();
 const authorization = require('./routes/authorize')
+const userId = new express.Router();
 
 let allowCORS = (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -21,7 +22,9 @@ publicRouter.post('/login', loginUser);
 authRouter.use(validateToken);
 
 authRouter.get('/level_data/:id', getLevelData)
-
+authRouter.get('/signedin',(req,res) => {
+  res.send('is user');
+});
 app.use(express.static("public"));
 app.use(allowCORS);
 app.use(publicRouter);
