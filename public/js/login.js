@@ -79,12 +79,7 @@ let automaticSignIn = () => {
         response.text())
     .then(message => {
       if(message === 'is user') {
-          loginForm.classList.remove("hidden");
           showInstructions();   
-          getLevelData(level);
-      }
-      else {
-        loginForm.classList.add("hidden");
       }
     })
   }  
