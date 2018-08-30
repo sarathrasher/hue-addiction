@@ -1,8 +1,17 @@
 let playColors = document.querySelectorAll('.play-color');
 let level = 1;
+
 let getLevelData = level => {
-  fetch('/level_data/' + level)
-  .then(res => res.json())
+  let token = localStorage.getItem("token");
+  fetch('/api/level_data/' + level, {
+    headers: {
+      "token": token
+    }
+  })
+  .then(res => {
+    console.log(res);
+    return res.json();
+  })
   .then(data => {
     console.log(data);
     let i;
@@ -22,19 +31,8 @@ let getLevelData = level => {
         j++;
       }
     }
-    while (iArr.length < data.solutionColors.length + data.decoyColors.length) {
-      i = Math.floor(Math.random() * (data.solutionColors.length + data.decoyColors.length));
-      if (!iArr.includes(i)){
-        playColors[i].style.backgroundColor = data.decoyColors[i];
-        iArr.push(i);
-      }
-    }
-    let color_1 = $.Color(data.solutionColors[0]);
-    let color_2 = $.Color(data.solutionColors[1]);
-    document.querySelector('.mixed-color').style.backgroundColor = Color_mixer.mix(color_1, color_2).toHexString();
   });
 }
-getLevelData(level);
 
 // target elements with the "draggable" class
 interact('.play-color')

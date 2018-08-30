@@ -2,6 +2,7 @@ const {createUser, validateToken, loginUser} = require('./routes/login');
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const router = new express.Router();
 const authRouter =  new express.Router();
 const publicRouter = new express.Router();
 const db = require('./database');
@@ -58,11 +59,12 @@ app.use(bodyParser.json());
 
 publicRouter.post("/users", createUser);
 publicRouter.post('/login', loginUser);
-authRouter.use(validateToken,authorization);
+authRouter.use(validateToken);
 
-app.get('/level_data/:id', getLevelData);
+authRouter.get('/level_data/:id', getLevelData)
+
 app.use(express.static("public"));
 app.use(allowCORS);
 app.use(publicRouter);
-app.use(authRouter);
+app.use('/api', authRouter);
 app.listen(3000);
