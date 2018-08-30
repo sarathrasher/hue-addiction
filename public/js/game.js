@@ -5,7 +5,7 @@ let time;
 let scoreDisplay = document.querySelector('.score');
 let timeDisplay = document.querySelector('.time');
 let scoreTimer;
-let getLevelData = level => {
+let fetchLevelData = level => {
   let token = localStorage.getItem("token");
   fetch('/api/level_data/' + level, {
     headers: {
@@ -136,7 +136,7 @@ interact('.play-color').dropzone({
           console.log('Game over.');
           return;
         }
-        getLevelData(level);
+        fetchLevelData(level);
         resetElement(event.relatedTarget);
         event.relatedTarget.classList.remove('hidden');
         feedbackDisplay.textContent = '';
