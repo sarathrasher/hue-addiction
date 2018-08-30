@@ -1,6 +1,7 @@
 let playColors = document.querySelectorAll('.play-color');
 let level = 1;
-
+let score = 100;
+let scoreDisplay = document.querySelector('.score');
 let getLevelData = level => {
   let token = localStorage.getItem("token");
   fetch('/api/level_data/' + level, {
@@ -31,6 +32,13 @@ let getLevelData = level => {
         j++;
       }
     }
+    // Starting score
+    score = 100;
+    scoreDisplay.textContent = score;
+    let scoreTimer = setInterval(() => {
+      score--;
+      scoreDisplay.textContent = score;
+    }, 100);
   });
 }
 
