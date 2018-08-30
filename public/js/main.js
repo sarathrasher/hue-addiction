@@ -13,3 +13,17 @@ let showStats = () => {
 };
 
 statsBtn.addEventListener("click", showStats);
+
+// debugging game data fetch
+let token = localStorage.getItem("token");
+fetch('/api/game_data/1',  {
+  headers: {
+    "token": token
+  }
+}).then(res => {
+  console.log(res);
+  return res.json();
+})
+.then(data => {
+  console.log(data);
+});

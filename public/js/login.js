@@ -50,7 +50,6 @@ let loginUser = (event) => {
       response.text().then(token => {
         localStorage.setItem("token", token);
         loginForm.reset();
-        getLevelData(level);
         showInstructions();
       })
   })

@@ -1,5 +1,6 @@
 const {createUser, validateToken, loginUser} = require('./routes/login');
 const getLevelData = require('./routes/levels');
+const gameRoutes = require('./routes/game')
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
@@ -23,6 +24,8 @@ authRouter.get('/level_data/:id', getLevelData)
 authRouter.get('/signedin',(req,res) => {
   res.send('is user');
 });
+authRouter.get('/game_data/:id', gameRoutes.getGameData);
+
 app.use(express.static("public"));
 app.use(allowCORS);
 app.use(publicRouter);
