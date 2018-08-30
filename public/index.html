@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./css/instructions.css">
   <link rel="stylesheet" href="./css/game.css">
   <link rel="stylesheet" href="./css/data.css">
+  <link rel="stylesheet" href="./css/stats.css">
   <title>Color Addiction</title>
 </head>
 
@@ -25,7 +26,7 @@
     </nav>
   </header>
   <div class="contents">
-    <form class="login-form" action="">
+    <form class="login-form hidden" action="">
       <input class="login-email" type="email" placeholder="Email" required>
       <input class="login-password" type="password" placeholder="Password" required>
       <input class="create-button button" type="submit" value="Create Account">
@@ -50,7 +51,7 @@
       </div>
     </div>
     <div class="stats">
-      <ul class="level-list">
+      <ul class="level-list list">
         <li class="level-number">
           <a class="level-link" href="">1</a>
         </li>
@@ -67,12 +68,12 @@
       <div class="scores">
         <div class="score">
           <h3 class="score-header">Your Score</h3>
-          <ul class="personal-score-list">
+          <ul class="personal-score-list list">
             <li class="personal-score"></li>
             <li class="personal-time"></li>
           </ul>
           <h3 class="score-header">Average Score</h3>
-          <ul class="average-score-list">
+          <ul class="average-score-list list">
             <li class="average-score"></li>
             <li class="average-time"></li>
           </ul>
