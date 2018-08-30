@@ -32,6 +32,9 @@ let getLevelData = level => {
         j++;
       }
     }
+    let color_1 = $.Color(data.solutionColors[0]);
+    let color_2 = $.Color(data.solutionColors[1]);
+    document.querySelector('.mixed-color').style.backgroundColor = Color_mixer.mix(color_1, color_2).toHexString();
     // Starting score
     score = 100;
     scoreDisplay.textContent = score;
