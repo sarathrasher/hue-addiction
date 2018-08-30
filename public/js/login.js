@@ -68,7 +68,7 @@ let automaticSignIn = () => {
   let checkUser;
   if(localStorage.getItem("token")) {
     checkUser = localStorage.getItem("token");
-    fetch(`/signedin`, {
+    fetch(`/api/signedin`, {
       method:"GET",
       headers: {
         "Content-Type": "application/json",
@@ -80,11 +80,11 @@ let automaticSignIn = () => {
     .then(message => {
       if(message === 'is user') {
           loginForm.classList.remove("hidden");
+          showInstructions();   
+          getLevelData(level);
       }
       else {
-        loginForm.reset();
-        getLevelData(level);
-        showInstructions(); 
+        loginForm.classList.add("hidden");
       }
     })
   }  
