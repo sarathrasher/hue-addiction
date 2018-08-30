@@ -7,9 +7,7 @@
   border: solid 0.3em var(--dk-blue);
 }
 
-.hide-form {
-  display: none;
-}
+
 
 .login-email, .login-password {
   margin: 1em;

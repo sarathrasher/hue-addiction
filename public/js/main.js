@@ -1,27 +1,28 @@
-let loginBtn = document.querySelector(".login-button");
-let createBtn = document.querySelector(".create-button");
-let playBtn = document.querySelector(".nav-link-play");
-let instructions = document.querySelector(".instructions");
-let game = document.querySelector(".game");
-let instructionsStartGame = document.querySelector(".start-button");
-let statsBtn = document.querySelector(".nav-link-stat");
+let startGameInstructions = document.querySelector(".start-button");
+let statsBtn = document.querySelector(".nav-link-stats");
+
+let form = document.querySelector(".login-form");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  showInstructions();
+});
 
 let showInstructions = () => {
+  let instructions = document.querySelector(".instructions");
   instructions.classList.remove("hidden");
-  let form = document.querySelector(".login-form");
-  form.classList.add("hide-form");
+  form.classList.add("hidden");
+  return instructions;
 };
 
 let showGame = () => {
+  let game = document.querySelector(".game");
   game.classList.remove("hidden");
   instructions.classList.add("hidden");
 };
 
 let showStats = () => {
-  console.log('stats');
+  console.log("stats");
 };
 
-createBtn.addEventListener("click", showInstructions);
-loginBtn.addEventListener("click", showInstructions);
-instructionsStartGame.addEventListener("click", showGame);
-statsBtn.addEventListener('click', showStats);
+startGameInstructions.addEventListener("click", showGame);
+statsBtn.addEventListener("click", showStats);
