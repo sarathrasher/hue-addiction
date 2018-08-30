@@ -1,41 +1,38 @@
 let playColors = document.querySelectorAll('.play-color');
+let level = 1;
 
-let getToken = () => localStorage.getItem("token");
-
-
-fetch('http://localhost:3000/api/level_data/1', {headers: {authorization: getToken()}})
-.then(res => res.json())
-.then(data => {
-  console.log(data);
-  let i;
-  let iArr = [];
-  // eventually we will want to create play-color elements in these while loops
-  let j = 0;
-  while (iArr.length < data.solutionColors.length + data.decoyColors.length){
-    i = Math.floor(Math.random() * (data.solutionColors.length + data.decoyColors.length));
-    if (j < data.solutionColors.length && !iArr.includes(i)) {
-      playColors[i].setAttribute('data-target', true);
-      playColors[i].style.backgroundColor = data.solutionColors[j];
-      j++;
-      iArr.push(i);
-    } else if (!iArr.includes(i)) {
-      playColors[i].style.backgroundColor = data.decoyColors[j - data.solutionColors.length];
-      iArr.push(i);
-      j++;
+let getLevelData = level => {
+  let token = localStorage.getItem("token");
+  fetch('/api/level_data/' + level, {
+    headers: {
+      "token": token
     }
-    while (iArr.length < data.solutionColors.length + data.decoyColors.length) {
+  })
+  .then(res => {
+    console.log(res);
+    return res.json();
+  })
+  .then(data => {
+    console.log(data);
+    let i;
+    let iArr = [];
+    // eventually we will want to create play-color elements in these while loops
+    let j = 0;
+    while (iArr.length < data.solutionColors.length + data.decoyColors.length){
       i = Math.floor(Math.random() * (data.solutionColors.length + data.decoyColors.length));
-      if (!iArr.includes(i)){
-        playColors[i].style.backgroundColor = data.decoyColors[i];
+      if (j < data.solutionColors.length && !iArr.includes(i)) {
+        playColors[i].setAttribute('data-target', true);
+        playColors[i].style.backgroundColor = data.solutionColors[j];
+        j++;
         iArr.push(i);
+      } else if (!iArr.includes(i)) {
+        playColors[i].style.backgroundColor = data.decoyColors[j - data.solutionColors.length];
+        iArr.push(i);
+        j++;
       }
     }
-    let color_1 = $.Color(data.solutionColors[0]);
-    let color_2 = $.Color(data.solutionColors[1]);
-    document.querySelector('.mixed-color').style.backgroundColor = Color_mixer.mix(color_1, color_2).toHexString();
   });
 }
-getLevelData(level);
 
 // target elements with the "draggable" class
 interact('.play-color')

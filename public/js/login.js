@@ -26,6 +26,7 @@ let createUser = (event) => {
   .then(response => {
     loginForm.reset()
     console.log(response);
+    getLevelData(level);
   })
 }
 
@@ -34,7 +35,7 @@ let loginUser = (event) => {
   let email = document.querySelector('.login-email').value;
   let password = document.querySelector('.login-password').value;
   let data ={email: email, user_password: password};
-  fetch('http://localhost:3000/login', {
+  fetch('/login', {
     method: "POST", 
         cache: "no-cache", 
         credentials: "same-origin", 
@@ -50,7 +51,7 @@ let loginUser = (event) => {
         console.log(token);
         localStorage.setItem("token", token);
         loginForm.reset();
-        // getLevelData function
+        getLevelData(level);
       })
   })
 }
