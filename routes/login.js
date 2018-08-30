@@ -50,7 +50,7 @@ let loginUser = (req, res, next) => {
   };
   db.one(
     `SELECT 
-      email, user_password
+      *
     FROM
       users
     WHERE
@@ -58,10 +58,14 @@ let loginUser = (req, res, next) => {
     [userInput.email, userInput.password]
   )
     .then(data => {
+      console.log(data);
       let token = jwt.sign({ id: data.id }, password, { expiresIn: "1d" });
       res.send(token);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      res.end('Not authorized');
+    });
 };
 
 module.exports = { createUser, validateToken, loginUser };

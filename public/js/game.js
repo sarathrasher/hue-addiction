@@ -1,7 +1,11 @@
 let playColors = document.querySelectorAll('.play-color');
 let level = 1;
-
-let getLevelData = level => {
+let score = 100;
+let time;
+let scoreDisplay = document.querySelector('.score');
+let timeDisplay = document.querySelector('.time');
+let scoreTimer;
+let fetchLevelData = level => {
   let token = localStorage.getItem("token");
   fetch('/api/level_data/' + level, {
     headers: {
@@ -31,6 +35,25 @@ let getLevelData = level => {
         j++;
       }
     }
+    let color_1 = $.Color(data.solutionColors[0]);
+    let color_2 = $.Color(data.solutionColors[1]);
+    document.querySelector('.mixed-color').style.backgroundColor = Color_mixer.mix(color_1, color_2).toHexString();
+    // Starting score
+    score = 100;
+    scoreDisplay.textContent = score;
+    scoreTimer = setInterval(() => {
+      if (score > 0) {
+        score--;
+        scoreDisplay.textContent = score;
+      }
+    }, 200);
+    // Starting time
+    let startTime = Date.now();
+    timeTimer = setInterval(() => {
+      time = Date.now() - startTime;
+      let date = new Date(time);
+      timeDisplay.textContent = date.getSeconds();
+    }, 200);
   });
 }
 
@@ -93,8 +116,10 @@ interact('.play-color').dropzone({
       element.setAttribute('data-x', 0);
       element.setAttribute('data-y', 0);
     })
+    let feedbackDisplay = document.querySelector('.feedback');
     if (event.target.getAttribute('data-target') === 'true' &&
     event.relatedTarget.getAttribute('data-target') === 'true') {
+      feedbackDisplay.textContent = "Correct!";
       // Insert Game logic for correct answer
       let color_1 = $.Color(event.relatedTarget.style.backgroundColor);
       let color_2 = $.Color(event.target.style.backgroundColor);
@@ -103,18 +128,29 @@ interact('.play-color').dropzone({
       event.relatedTarget.classList.add('hidden');
       event.target.setAttribute('data-target', false)
       event.relatedTarget.setAttribute('data-target', false)
+      clearInterval(scoreTimer);
+      clearInterval(timeTimer);
       setTimeout(() => {
         level++;
         if (level > 4) {
           console.log('Game over.');
           return;
         }
-        getLevelData(level);
+        fetchLevelData(level);
         resetElement(event.relatedTarget);
         event.relatedTarget.classList.remove('hidden');
+        feedbackDisplay.textContent = '';
       }, 1000);
     } else {
       // Insert Game logic for wrong answer
+      if (score > 0) {
+        feedbackDisplay.textContent = "Penalty, wrong answer: -10 points";
+        score -= 10;
+        scoreDisplay.textContent = score;
+        setTimeout(() => {
+          feedbackDisplay.textContent = '';
+        }, 1000)
+      }
       resetElement(event.relatedTarget);
     }
   },

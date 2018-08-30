@@ -26,7 +26,6 @@ let createUser = (event) => {
   .then(response => {
     loginForm.reset()
     console.log(response);
-    getLevelData(level);
     showInstructions();
   })
 }
@@ -52,7 +51,6 @@ let loginUser = (event) => {
         console.log(token);
         localStorage.setItem("token", token);
         loginForm.reset();
-        getLevelData(level);
         showInstructions();
       })
   })
