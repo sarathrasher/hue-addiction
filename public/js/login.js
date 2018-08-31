@@ -78,6 +78,8 @@ let automaticSignIn = () => {
     .then(message => {
       if(message === 'is user') {
           showInstructions();   
+      } else {
+        showLogin();
       }
     })
   }  
