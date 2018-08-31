@@ -22,7 +22,7 @@ publicRouter.post('/login', loginUser);
 authRouter.use(validateToken);
 
 authRouter.get('/level_data/:id', getLevelData)
-authRouter.get('/game_data/:id', gameRoutes.getGameData);
+authRouter.get('/game_data', gameRoutes.getGameData);
 
 app.use(express.static("public"));
 app.use(allowCORS);
