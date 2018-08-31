@@ -26,6 +26,9 @@ authRouter.get('/signedin',(req,res) => {
   res.send('is user');
 });
 
+authRouter.get('/game_data', gameRoutes.getGameData);
+authRouter.post('/game_data', gameRoutes.postGameData);
+
 app.use(express.static("public"));
 app.use(allowCORS);
 app.use(publicRouter);

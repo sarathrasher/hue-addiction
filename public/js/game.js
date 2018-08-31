@@ -1,5 +1,6 @@
 let playColors = document.querySelectorAll('.play-color');
 let level = 1;
+let stage = 1;
 let score = 100;
 let time;
 let scoreDisplay = document.querySelector('.score');
@@ -52,7 +53,8 @@ let fetchLevelData = level => {
     timeTimer = setInterval(() => {
       time = Date.now() - startTime;
       let date = new Date(time);
-      timeDisplay.textContent = date.getSeconds();
+      time = date.getSeconds();
+      timeDisplay.textContent = time;
     }, 200);
   });
 }
@@ -130,6 +132,29 @@ interact('.play-color').dropzone({
       event.relatedTarget.setAttribute('data-target', false)
       clearInterval(scoreTimer);
       clearInterval(timeTimer);
+      // Send level data to server.
+      let level_data = {
+        stage,
+        level,
+        score,
+        time
+      };
+      console.log(JSON.stringify(level_data));
+      let token = localStorage.getItem("token");
+      console.log(token);
+      fetch('/api/game_data',  {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "token": token
+        },
+        body: JSON.stringify(level_data)
+      }).then(res => {
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+      });
       setTimeout(() => {
         level++;
         if (level > 4) {
