@@ -15,11 +15,22 @@ let showStats = () => {
 statsBtn.addEventListener("click", showStats);
 
 // debugging game data fetch
+let level_data = {
+  stage: '1',
+  level: '1',
+  score: '35',
+  time: '10'
+};
+console.log(JSON.stringify(level_data));
 let token = localStorage.getItem("token");
-fetch('/api/game_data/1',  {
+console.log(token);
+fetch('/api/game_data',  {
+  method: 'POST',
   headers: {
+    "Content-Type": "application/json",
     "token": token
-  }
+  },
+  body: JSON.stringify(level_data)
 }).then(res => {
   console.log(res);
   return res.json();

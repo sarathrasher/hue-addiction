@@ -53,7 +53,8 @@ let getGameData = (req, res) => {
 
 let postGameData = (req, res) => {
   console.log('User: ' + req.user.id);
-  console.log(req.user);
+  console.log(req.body);
+  res.send(req.body);
 }
 
 module.exports = {postGameData, getGameData};
