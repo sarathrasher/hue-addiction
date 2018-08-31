@@ -24,8 +24,7 @@ let createUser = (event) => {
         body: JSON.stringify(data),
   })
   .then(response => {
-    loginForm.reset()
-    getLevelData(level);
+    loginForm.reset();
     showInstructions();
   })
 }
