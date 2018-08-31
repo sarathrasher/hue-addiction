@@ -33,7 +33,7 @@
   width: 50%;
 }
 
-.score {
+.score-sheet {
   display: flex;
   flex-direction: column;
   align-items: center;
