@@ -50,28 +50,35 @@ let validateToken = async (req, res, next) => {
 // 
 
 let loginUser = (req, res, next) => {
-  let userInput = {
-    email: req.body.email,
-    password: req.body.user_password
-  };
-  db.one(
-    `SELECT 
-      *
-    FROM
-      users
-    WHERE
-    email = $1 and user_password = $2;`,
-    [userInput.email, userInput.password]
-  )
-    .then(data => {
-      console.log(data);
-      let token = jwt.sign({ id: data.id }, password, { expiresIn: "1d" });
-      res.send(token);
-    })
-    .catch(err => {
+  bcrypt.hash(req.body.user_password, 15, (err,hash) => {
+    if(err) {
       console.log(err);
-      res.end('Not authorized');
-    });
+    }
+    else {
+      let userInput = {
+        email: req.body.email,
+        password: hash
+      };
+      db.one(
+        `SELECT 
+          *
+        FROM
+          users
+        WHERE
+        email = $1 and user_password = $2;`,
+        [userInput.email, userInput.password]
+      )
+      .then(data => {
+        console.log(data);
+        let token = jwt.sign({ id: data.id }, password, { expiresIn: "1d" });
+        res.send(token);
+      })
+      .catch(err => {
+        console.log(err);
+        res.end('Not authorized');
+      });
+    }
+  });
 };
 
 module.exports = { createUser, validateToken, loginUser };
