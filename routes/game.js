@@ -54,7 +54,26 @@ let getGameData = (req, res) => {
 let postGameData = (req, res) => {
   console.log('User: ' + req.user.id);
   console.log(req.body);
-  res.send(req.body);
+  db.query(`UPDATE game SET score=${req.body.score}, level_time=${req.body.time} WHERE user_id=${req.user.id} AND stage=${req.body.stage} AND level=${req.body.level} RETURNING *`)
+  .then(data => {
+    if (data.length === 0) {
+      db.query(`INSERT INTO game
+      (user_id, stage, level, score, level_time)
+      VALUES
+      (${req.user.id}, ${req.body.stage}, ${req.body.level}, ${req.body.score}, ${req.body.time}) RETURNING *`)
+      .then(data => {
+        console.log(data);
+        res.send(data);
+      })
+    } else {
+      console.log(data);
+      res.send(data);
+    }
+  })
+  .catch(err => {
+    console.log(err);
+    res.end('Error');
+  })
 }
 
 module.exports = {postGameData, getGameData};

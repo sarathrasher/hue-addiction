@@ -21,9 +21,9 @@ statsBtn.addEventListener("click", showStats);
 
 let level_data = {
   stage: '1',
-  level: '1',
-  score: '35',
-  time: '10'
+  level: '3',
+  score: '11',
+  time: '13'
 };
 console.log(JSON.stringify(level_data));
 let token = localStorage.getItem("token");
