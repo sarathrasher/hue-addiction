@@ -24,7 +24,7 @@ let createUser = (event) => {
         body: JSON.stringify(data),
   })
   .then(response => {
-    loginForm.reset();
+    createButton.classList.add('hidden');
   })
 }
 

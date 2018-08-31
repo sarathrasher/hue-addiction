@@ -8,6 +8,8 @@ let showLogin = () => {
 let showInstructions = () => {
   let form = document.querySelector('.login-form')
   let instructions = document.querySelector(".instructions");
+  let navBar = document.querySelector('.nav');
+  navBar.classList.remove('hidden');
   form.classList.add("hidden");
   instructions.classList.remove("hidden");
   return instructions;
