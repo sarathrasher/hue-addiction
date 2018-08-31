@@ -25,7 +25,6 @@ let createUser = (event) => {
   })
   .then(response => {
     loginForm.reset();
-    showInstructions();
   })
 }
 
@@ -64,6 +63,7 @@ let validateUser = (user) => {
 
 let automaticSignIn = () => {
   let checkUser;
+  console.log('checking user');
   if(localStorage.getItem("token")) {
     checkUser = localStorage.getItem("token");
     fetch(`/api/signedin`, {
@@ -76,13 +76,16 @@ let automaticSignIn = () => {
     .then(response => 
         response.text())
     .then(message => {
+      console.log(message);
       if(message === 'is user') {
-          showInstructions();   
+        showInstructions();
       } else {
         showLogin();
       }
     })
-  }  
+  } else {
+    showLogin();
+  }
 }
 createButton.addEventListener('click', createUser);
 loginButton.addEventListener('click', loginUser);
