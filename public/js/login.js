@@ -24,8 +24,7 @@ let createUser = (event) => {
         body: JSON.stringify(data),
   })
   .then(response => {
-    loginForm.reset()
-    console.log(response);
+    loginForm.reset();
     showInstructions();
   })
 }
@@ -48,7 +47,6 @@ let loginUser = (event) => {
   })
   .then(response => {
       response.text().then(token => {
-        console.log(token);
         localStorage.setItem("token", token);
         loginForm.reset();
         showInstructions();
@@ -56,6 +54,35 @@ let loginUser = (event) => {
   })
 }
 
+//check to see if values in object are empty.
+let validateUser = (user) => {
+  if(user.email && user.user_password) {
+    return true;
+  }
+  return false;
+};
+
+let automaticSignIn = () => {
+  let checkUser;
+  if(localStorage.getItem("token")) {
+    checkUser = localStorage.getItem("token");
+    fetch(`/api/signedin`, {
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        "token": checkUser
+      }
+    })
+    .then(response => 
+        response.text())
+    .then(message => {
+      if(message === 'is user') {
+          showInstructions();   
+      }
+    })
+  }  
+}
 createButton.addEventListener('click', createUser);
 loginButton.addEventListener('click', loginUser);
+automaticSignIn();
 
