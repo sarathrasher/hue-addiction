@@ -4,7 +4,6 @@ const gameRoutes = require('./routes/game')
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const router = new express.Router();
 const authRouter =  new express.Router();
 const publicRouter = new express.Router();
 const authorization = require('./routes/authorize')
@@ -22,6 +21,9 @@ publicRouter.post('/login', loginUser);
 authRouter.use(validateToken);
 
 authRouter.get('/level_data/:id', getLevelData)
+authRouter.get('/signedin',(req,res) => {
+  res.send('is user');
+});
 authRouter.get('/game_data/:id', gameRoutes.getGameData);
 
 app.use(express.static("public"));

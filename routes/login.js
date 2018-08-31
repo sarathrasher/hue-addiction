@@ -38,7 +38,7 @@ let validateToken = async (req, res, next) => {
   }
 
   if (payload) {
-    req.user = payload;
+    req.jwt = payload;
     next();
   } else {
     res.send("invalid token");
