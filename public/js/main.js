@@ -1,5 +1,10 @@
 let statsBtn = document.querySelector(".nav-link-stats");
 
+let showLogin = () => {
+  let loginForm = document.querySelector('.login-form');
+  loginForm.classList.remove('hidden');
+}
+
 let showInstructions = () => {
   let form = document.querySelector('.login-form')
   let instructions = document.querySelector(".instructions");
@@ -15,6 +20,7 @@ let showStats = () => {
   game.classList.add('hidden');
   instructions.classList.add('hidden');
   statsPage.classList.remove('hidden');
+  fetchScores();
 };
 
 statsBtn.addEventListener("click", showStats);
