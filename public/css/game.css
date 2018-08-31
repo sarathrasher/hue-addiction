@@ -8,13 +8,27 @@
   height: 100%;
   top: 0;
   left: 0;
-  margin-top: 1em;
+  margin-top: 1vh 30vh 1vh 30vh;
+}
+
+.score-time {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  margin: 1em 7em 1em 7em;
+  justify-content: space-around;
+}
+
+.score-ticker {
+  display: flex;
+  justify-content: space-between;
+  width: 20vh;
 }
 
 .mixed-color {
   background-color: green;
-  width: 62vh;
-  height: 30vh;
+  width: 42vh;
+  height: 20vh;
 }
 
 .play-color-container {
@@ -30,47 +44,38 @@
   -ms-touch-action: none;
   touch-action: none;
   background-color: red;
-  width: 30vh;
-  height: 30vh;
+  width: 20vh;
+  height: 20vh;
   margin: 1vh;
 }
 
-/* @media (min-width: 425px) {
+@media (min-width: 425px) {
   .mixed-color {
-    width: 22em;
+    width: 56vh;
   }
   .play-color {
-    width: 10em;
-    height: 10em;
-  }
-} */
-
-/* @media (min-width: 768px) {
-  .mixed-color {
-    width: 32em;
-  }
-  .play-color {
-    width: 15em;
-    height: 15em;
+    width: 27vh;
+    height: 27vh;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 565px) {
   .mixed-color {
-    width: 42em;
+    width: 64vh;
   }
   .play-color {
-    width: 20em;
-    height: 20em;
+    width: 31vh;
+    height: 31vh;
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 640px) {
   .mixed-color {
-    width: 60em;
+    width: 68vh;
   }
   .play-color {
-    width: 29em;
-    height: 29em;
+    width: 33vh;
+    height: 33vh;
   }
-} */
+}
+
