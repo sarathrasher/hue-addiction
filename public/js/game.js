@@ -133,7 +133,7 @@ interact('.play-color').dropzone({
       setTimeout(() => {
         level++;
         if (level > 4) {
-          console.log('Game over.');
+          fetchScores();
           return;
         }
         fetchLevelData(level);
