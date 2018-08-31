@@ -50,7 +50,6 @@ let fetchScores = () => {
       });
     }
     insertStatsData(1, data);
-    showStats();
     console.log(data);
   })
 };
