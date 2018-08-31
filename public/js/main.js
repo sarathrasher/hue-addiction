@@ -1,4 +1,5 @@
 let statsBtn = document.querySelector(".nav-link-stats");
+let playButton = document.querySelector('.nav-link-play');
 
 let showLogin = () => {
   let loginForm = document.querySelector('.login-form');
@@ -9,8 +10,10 @@ let showInstructions = () => {
   let form = document.querySelector('.login-form')
   let instructions = document.querySelector(".instructions");
   let navBar = document.querySelector('.nav');
+  let statsPage = document.querySelector('.stats');
   navBar.classList.remove('hidden');
   form.classList.add("hidden");
+  statsPage.classList.add('hidden');
   instructions.classList.remove("hidden");
   return instructions;
 };
@@ -26,3 +29,4 @@ let showStats = () => {
 };
 
 statsBtn.addEventListener("click", showStats);
+playButton.addEventListener('click', showInstructions);
