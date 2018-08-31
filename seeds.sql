@@ -34,3 +34,10 @@ INSERT INTO game(user_id, stage, level, score, level_time)
     ('10', '1', '1', '70', '80'),
     ('10', '1', '2', '0', '0'),
     ('10', '2', '1', '0', '0');
+
+INSERT INTO game(user_id, stage, level, score, level_time)
+  VALUES
+    ('25', '1', '1', '40', '50'),
+    ('25', '1', '2', '25', '60'),
+    ('25', '2', '1', '45', '30'),
+    ('25', '2', '1', '20', '70');
