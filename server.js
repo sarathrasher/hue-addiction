@@ -4,7 +4,6 @@ const gameRoutes = require('./routes/game')
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const router = new express.Router();
 const authRouter =  new express.Router();
 const publicRouter = new express.Router();
 const authorization = require('./routes/authorize')
@@ -23,6 +22,9 @@ authRouter.use(validateToken);
 
 authRouter.get('/level_data/:id', getLevelData)
 authRouter.get('/game_data', gameRoutes.getGameData);
+authRouter.get('/signedin',(req,res) => {
+  res.send('is user');
+});
 
 app.use(express.static("public"));
 app.use(allowCORS);
