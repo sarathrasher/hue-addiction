@@ -23,7 +23,12 @@ let createUser = (event) => {
         referrer: "no-referrer", 
         body: JSON.stringify(data),
   })
-  .then(response => {
+  .then(() => {
+    if(!validateUser(data)) {
+      let message = document.querySelector('.show-message');
+      message.classList.remove('hidden');
+      loginForm.setAttribute('disabled');
+    }
     createButton.classList.add('hidden');
   })
 }
@@ -46,6 +51,11 @@ let loginUser = (event) => {
   })
   .then(response => {
       response.text().then(token => {
+        if(!response || !validateUser(data)) {
+          let message = document.querySelector('.show-message');
+          message.classList.remove('hidden');    
+          loginForm.setAttribute('disabled');
+        }
         localStorage.setItem("token", token);
         loginForm.reset();
         showInstructions();
