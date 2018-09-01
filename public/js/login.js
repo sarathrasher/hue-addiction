@@ -6,6 +6,7 @@
 let createButton = document.querySelector('.create-button');
 let loginButton = document.querySelector('.login-button');
 let loginForm = document.querySelector('.login-form');
+let logOutBtn = document.querySelector('.nav-link-logout');
 
 let createUser = (event) => {
   event.preventDefault();
@@ -97,7 +98,16 @@ let automaticSignIn = () => {
     showLogin();
   }
 }
+
+let loggOut = () => {
+  localStorage.removeItem("token");
+  let game = document.querySelector('.game');
+  game.classList.add('hidden');
+  loginForm.classList.remove('hidden');
+};
+
 createButton.addEventListener('click', createUser);
 loginButton.addEventListener('click', loginUser);
+logOutBtn.addEventListener("click",loggOut);
 automaticSignIn();
 
