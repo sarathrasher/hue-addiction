@@ -25,3 +25,14 @@ CREATE TABLE game (
   level_time INTEGER NOT NULL,
   time_stamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+SELECT MAX (score), email, stage, level FROM game FULL OUTER JOIN users on users.id = user_id GROUP BY stage, level;
+
+SELECT email, (
+  SELECT id, level, stage, MAX (score) FROM game GROUP BY stage, level
+) FROM game INNER JOIN users on users.id = user_id;
+
+
+SELECT DISTINCT b.id, b.level, b.stage, a.max_score FROM (
+  SELECT level, stage, MAX (score) AS max_score FROM game GROUP BY level, stage
+) a JOIN game b ON a.level = b.level AND a.stage = b.stage AND a.max_score = b.score;
