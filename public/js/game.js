@@ -1,8 +1,9 @@
 let playColors = document.querySelectorAll('.play-color');
 let level;
 let stage;
-let score;
+let score, totalScore;
 let time;
+let totalScoreDisplay = document.querySelector('.total-score');
 let scoreDisplay = document.querySelector('.score');
 let timeDisplay = document.querySelector('.time');
 let scoreTimer;
@@ -11,6 +12,7 @@ let resetGame = () => {
   level = 1;
   stage = 1;
   score = 100;
+  totalScore = 0;
 }
 
 resetGame();
@@ -141,6 +143,8 @@ interact('.play-color').dropzone({
       event.relatedTarget.setAttribute('data-target', false)
       clearInterval(scoreTimer);
       clearInterval(timeTimer);
+      totalScore += score;
+      totalScoreDisplay.textContent = totalScore;
       // Send level data to server.
       let level_data = {
         stage,
