@@ -13,7 +13,9 @@ let insertStatsData = (level, data) => {
     console.log(level);
   }
   let statsObject = data;
-  for (let j = 1; j <= 2; j++) {
+  // Commenting out stage loop due to errors.
+  // for (let j = 1; j <= 2; j++) {
+    let j = 1;
     let stage = 'stage' + j;
     if (statsObject.average[stage]) {
       console.log(statsObject.average[stage]);
@@ -35,7 +37,7 @@ let insertStatsData = (level, data) => {
         personalTime.textContent = `Your time: ${personalTimeContent}`;
       }
     }   
-  }
+  // }
 };
 
 let fetchScores = () => {

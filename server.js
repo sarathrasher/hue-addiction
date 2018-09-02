@@ -21,12 +21,10 @@ publicRouter.post('/login', loginUser);
 authRouter.use(validateToken);
 
 authRouter.get('/level_data/:id', getLevelData)
-authRouter.get('/game_data', gameRoutes.getGameData);
 authRouter.get('/signedin',(req,res) => {
   res.send('is user');
 });
-
-authRouter.get('/game_data', gameRoutes.getGameData);
+authRouter.get('/game_data/:stage/:level', gameRoutes.getGameDataByLevel);
 authRouter.post('/game_data', gameRoutes.postGameData);
 
 app.use(express.static("public"));

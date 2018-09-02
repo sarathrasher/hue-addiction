@@ -15,20 +15,17 @@ let formatData = data => {
   return formattedData;
 }
 
-let getGameData = (req, res) => {
-  console.log(req.user.id);
-  let userData = averageData = db.query(`SELECT stage, level, score, level_time FROM game WHERE user_id = ${req.user.id}`);
-  let allData = db.query(`select stage, level, AVG (score) as score, AVG (level_time) as level_time FROM game GROUP BY stage, level`);
-  Promise.all([userData, allData])
+let getGameDataByLevel = (req, res) => {
+  let userData = db.one(`SELECT score, level_time AS time FROM game WHERE user_id = ${req.user.id} AND level=${req.params.level} AND stage=${req.params.stage}`);
+  let averageData = db.one(`SELECT ROUND(AVG(score), 2) as score, ROUND(AVG(level_time), 2) AS time FROM game WHERE level=${req.params.level} AND stage=${req.params.stage}`);
+  let leaderData = db.query(`SELECT users.email, game.score, game.level_time AS time FROM game INNER JOIN users ON game.user_id=users.id WHERE level=${req.params.level} AND stage=${req.params.stage} ORDER BY score DESC LIMIT 3`);
+  Promise.all([userData, averageData, leaderData])
   .then(data => {
-    console.log(data);
-    let userData = formatData(data[0]);
-    let averageData = formatData(data[1]);
-    res.send({user: userData, average: averageData});
+    let user = data[0];
+    let average = data[1];
+    let leaders = data[2];
+    res.send({user, average, leaders});
   })
-  .catch(err => {
-    res.send(err);
-  });
 }
 
 let postGameData = (req, res) => {
@@ -56,4 +53,4 @@ let postGameData = (req, res) => {
   })
 }
 
-module.exports = {postGameData, getGameData};
+module.exports = {postGameData, getGameData, getGameDataByLevel};
