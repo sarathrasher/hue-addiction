@@ -7,7 +7,11 @@
   border: solid 0.3em var(--dk-blue);
 }
 
-
+.login-message {
+  display: block;
+  font-size: 1.25rem;
+  margin: 1em;
+}
 
 .login-email, .login-password {
   margin: 1em;
