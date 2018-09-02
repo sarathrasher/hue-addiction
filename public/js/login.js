@@ -100,14 +100,16 @@ let automaticSignIn = () => {
 }
 
 let logOut = () => {
+  event.preventDefault();
   localStorage.removeItem("token");
   let game = document.querySelector('.game');
   game.classList.add('hidden');
-  let logoutLink = document.querySelector('.nav-logout');
-  logoutLink.classList.add('logout-remove');
   let instructions = document.querySelector('.instructions');
   instructions.classList.add('hidden');
   loginForm.classList.remove('hidden');
+  let navBar = document.querySelector('.nav');
+  navBar.classList.add('hidden');
+  resetGame();
 };
 
 createButton.addEventListener('click', createUser);
