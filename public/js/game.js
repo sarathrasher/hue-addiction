@@ -1,11 +1,20 @@
 let playColors = document.querySelectorAll('.play-color');
-let level = 1;
-let stage = 1;
-let score = 100;
+let level;
+let stage;
+let score;
 let time;
 let scoreDisplay = document.querySelector('.score');
 let timeDisplay = document.querySelector('.time');
 let scoreTimer;
+
+let resetGame = () => {
+  level = 1;
+  stage = 1;
+  score = 100;
+}
+
+resetGame();
+
 let fetchLevelData = level => {
   let token = localStorage.getItem("token");
   fetch('/api/level_data/' + level, {
@@ -157,14 +166,15 @@ interact('.play-color').dropzone({
       });
       setTimeout(() => {
         level++;
-        if (level > 4) {
-          showStats();
-          return;
-        }
-        fetchLevelData(level);
         resetElement(event.relatedTarget);
         event.relatedTarget.classList.remove('hidden');
         feedbackDisplay.textContent = '';
+        if (level > 4) {
+          showStats();
+          resetGame();
+          return;
+        }
+        fetchLevelData(level);
       }, 1000);
     } else {
       // Insert Game logic for wrong answer
