@@ -6,6 +6,7 @@
 let createButton = document.querySelector('.create-button');
 let loginButton = document.querySelector('.login-button');
 let loginForm = document.querySelector('.login-form');
+let logOutBtn = document.querySelector('.nav-link-logout');
 
 let createUser = (event) => {
   event.preventDefault();
@@ -23,7 +24,10 @@ let createUser = (event) => {
         referrer: "no-referrer", 
         body: JSON.stringify(data),
   })
-  .then(response => {
+  .then(() => {
+    if(!validateUser(data)) {
+      loginForm.setAttribute('disabled');
+    }
     createButton.classList.add('hidden');
   })
 }
@@ -46,6 +50,13 @@ let loginUser = (event) => {
   })
   .then(response => {
       response.text().then(token => {
+        if(!response || !validateUser(data)) {
+          let message = document.querySelector('.show-message');
+          message.classList.remove('hidden');    
+          loginForm.setAttribute('disabled');
+        }
+        let message = document.querySelector('.show-message');
+        message.classList.add('hidden');    
         localStorage.setItem("token", token);
         loginForm.reset();
         showInstructions();
@@ -87,7 +98,20 @@ let automaticSignIn = () => {
     showLogin();
   }
 }
+
+let logOut = () => {
+  localStorage.removeItem("token");
+  let game = document.querySelector('.game');
+  game.classList.add('hidden');
+  let logoutLink = document.querySelector('.nav-logout');
+  logoutLink.classList.add('logout-remove');
+  let instructions = document.querySelector('.instructions');
+  instructions.classList.add('hidden');
+  loginForm.classList.remove('hidden');
+};
+
 createButton.addEventListener('click', createUser);
 loginButton.addEventListener('click', loginUser);
+logOutBtn.addEventListener("click",logOut);
 automaticSignIn();
 
