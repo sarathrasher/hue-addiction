@@ -25,7 +25,8 @@ let showStats = () => {
   game.classList.add('hidden');
   instructions.classList.add('hidden');
   statsPage.classList.remove('hidden');
-  fetchScores();
+  let level = 0; // Level 0 stores total scores/times.
+  fetchScores(stage, level); 
 };
 
 statsBtn.addEventListener("click", showStats);

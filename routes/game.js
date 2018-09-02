@@ -53,4 +53,4 @@ let postGameData = (req, res) => {
   })
 }
 
-module.exports = {postGameData, getGameData, getGameDataByLevel};
+module.exports = {postGameData, getGameDataByLevel};
