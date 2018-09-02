@@ -26,8 +26,6 @@ let createUser = (event) => {
   })
   .then(() => {
     if(!validateUser(data)) {
-      let message = document.querySelector('.show-message');
-      message.classList.remove('hidden');
       loginForm.setAttribute('disabled');
     }
     createButton.classList.add('hidden');
@@ -57,6 +55,8 @@ let loginUser = (event) => {
           message.classList.remove('hidden');    
           loginForm.setAttribute('disabled');
         }
+        let message = document.querySelector('.show-message');
+        message.classList.add('hidden');    
         localStorage.setItem("token", token);
         loginForm.reset();
         showInstructions();
@@ -99,15 +99,19 @@ let automaticSignIn = () => {
   }
 }
 
-let loggOut = () => {
+let logOut = () => {
   localStorage.removeItem("token");
   let game = document.querySelector('.game');
   game.classList.add('hidden');
+  let logoutLink = document.querySelector('.nav-logout');
+  logoutLink.classList.add('logout-remove');
+  let instructions = document.querySelector('.instructions');
+  instructions.classList.add('hidden');
   loginForm.classList.remove('hidden');
 };
 
 createButton.addEventListener('click', createUser);
 loginButton.addEventListener('click', loginUser);
-logOutBtn.addEventListener("click",loggOut);
+logOutBtn.addEventListener("click",logOut);
 automaticSignIn();
 

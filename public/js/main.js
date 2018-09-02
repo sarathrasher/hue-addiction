@@ -11,6 +11,8 @@ let showInstructions = () => {
   let navBar = document.querySelector('.nav');
   navBar.classList.remove('hidden');
   form.classList.add("hidden");
+  let logoutLink = document.querySelector('.nav-logout');
+  logoutLink.classList.remove('logout-remove')
   instructions.classList.remove("hidden");
   return instructions;
 };
