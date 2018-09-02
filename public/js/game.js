@@ -67,7 +67,12 @@ let fetchLevelData = level => {
     }, 200);
   });
 }
-
+// reset position of element
+let resetElement = (element => {
+  element.style.transform = 'translate(0px, 0px)';
+  element.setAttribute('data-x', 0);
+  element.setAttribute('data-y', 0);
+})
 // target elements with the "draggable" class
 interact('.play-color')
   .draggable({
@@ -79,9 +84,10 @@ interact('.play-color')
     // call this function on every dragmove event
     onmove: dragMoveListener,
     // call this function on every dragend event
-    // onend: function (event) {
-    //   // 
-    // }
+    onend: function (event) {
+      resetElement(event.target);
+      event.target.style.zIndex = 0;
+    }
   });
 
   function dragMoveListener (event) {
@@ -98,6 +104,8 @@ interact('.play-color')
     // update the posiion attributes
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
+    // set z-index
+    target.style.zIndex = 1;
   }
 
 // enable draggables to be dropped into this
@@ -122,11 +130,6 @@ interact('.play-color').dropzone({
     draggableElement.classList.add('can-drop');
   },
   ondrop: function (event) {
-    let resetElement = (element => {
-      element.style.transform = 'translate(0px, 0px)';
-      element.setAttribute('data-x', 0);
-      element.setAttribute('data-y', 0);
-    })
     let feedbackDisplay = document.querySelector('.feedback');
     if (event.target.getAttribute('data-target') === 'true' &&
     event.relatedTarget.getAttribute('data-target') === 'true') {
