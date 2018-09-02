@@ -3,8 +3,15 @@ let personalTime = document.querySelector('.personal-time');
 let averageScore = document.querySelector('.average-score');
 let averageTime = document.querySelector('.average-time');
 let levelLinks = document.querySelectorAll('.level-link');
+let statsHeading = document.querySelector('.stats-heading');
 
 let insertStatsData = (level, data) => {
+  if (level === 0) {
+    statsHeading.textContent = 'Total';
+  } else {
+    statsHeading.textContent = 'Level: ' + level;
+    console.log(level);
+  }
   let statsObject = data;
   for (let j = 1; j <= 2; j++) {
     let stage = 'stage' + j;
@@ -42,6 +49,11 @@ let fetchScores = () => {
     return res.json();
   })
   .then(data => {
+    document.querySelector('.level-total').addEventListener('click', event => {
+      event.preventDefault();
+      let level = 0;
+      insertStatsData(level, data); // Level 0 stores total scores/times.
+    })
     for (levelLink of levelLinks) {
       levelLink.addEventListener('click', (event) => {
         event.preventDefault();
@@ -49,7 +61,8 @@ let fetchScores = () => {
         insertStatsData(level, data);
       });
     }
-    insertStatsData(1, data);
+    statsHeading.textContent = "Total";
+    insertStatsData(0, data);  // Level 0 stores total scores/times.
     console.log(data);
   })
 };

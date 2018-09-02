@@ -2,10 +2,11 @@ let playColors = document.querySelectorAll('.play-color');
 let level;
 let stage;
 let score, totalScore;
-let time;
+let time, totalTime;
 let totalScoreDisplay = document.querySelector('.total-score');
 let scoreDisplay = document.querySelector('.score');
 let timeDisplay = document.querySelector('.time');
+let totalTimeDisplay = document.querySelector('.total-time');
 let scoreTimer;
 
 let resetGame = () => {
@@ -13,6 +14,7 @@ let resetGame = () => {
   stage = 1;
   score = 100;
   totalScore = 0;
+  totalTime = 0;
 }
 
 resetGame();
@@ -59,14 +61,15 @@ let fetchLevelData = level => {
         scoreDisplay.textContent = score;
       }
     }, 200);
+    totalScoreDisplay = totalScore;
     // Starting time
-    let startTime = Date.now();
+    time = 0;
+    timeDisplay.textContent = time;
     timeTimer = setInterval(() => {
-      time = Date.now() - startTime;
-      let date = new Date(time);
-      time = date.getSeconds();
+      time++;
       timeDisplay.textContent = time;
-    }, 200);
+    }, 1000);
+    totalTimeDisplay.textContent = totalTime;
   });
 }
 
@@ -145,35 +148,50 @@ interact('.play-color').dropzone({
       clearInterval(timeTimer);
       totalScore += score;
       totalScoreDisplay.textContent = totalScore;
+      totalTime += time;
+      totalTimeDisplay.textContent = totalTime;
       // Send level data to server.
-      let level_data = {
+      let sendLevelData = levelData => {
+        fetch('/api/game_data',  {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "token": token
+          },
+          body: JSON.stringify(levelData)
+        }).then(res => {
+          return res.json();
+        })
+        .then(data => {
+          console.log(data);
+        });
+      }
+      let levelData = {
         stage,
         level,
         score,
         time
       };
-      console.log(JSON.stringify(level_data));
+      console.log(JSON.stringify(levelData));
       let token = localStorage.getItem("token");
       console.log(token);
-      fetch('/api/game_data',  {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "token": token
-        },
-        body: JSON.stringify(level_data)
-      }).then(res => {
-        return res.json();
-      })
-      .then(data => {
-        console.log(data);
-      });
+      sendLevelData(levelData);
       setTimeout(() => {
         level++;
         resetElement(event.relatedTarget);
         event.relatedTarget.classList.remove('hidden');
         feedbackDisplay.textContent = '';
         if (level > 4) {
+          level = 0;  // Send total game data to level = 0
+          score = totalScore;
+          time = totalTime;
+          levelData = {
+            stage,
+            level,
+            score,
+            time
+          };
+          sendLevelData(levelData);
           showStats();
           resetGame();
           return;
