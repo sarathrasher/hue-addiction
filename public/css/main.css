@@ -115,7 +115,9 @@ body {
   opacity: 0;
   pointer-events: none;
 }
-
 .logout-remove {
+  display: none;
+}
+.remove {
   display: none;
 }

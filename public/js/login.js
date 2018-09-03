@@ -7,6 +7,7 @@ let createButton = document.querySelector('.create-button');
 let loginButton = document.querySelector('.login-button');
 let loginForm = document.querySelector('.login-form');
 let logOutBtn = document.querySelector('.nav-link-logout');
+let loginMessage = document.querySelector('.login-message');
 
 let createUser = (event) => {
   event.preventDefault();
@@ -24,11 +25,18 @@ let createUser = (event) => {
         referrer: "no-referrer", 
         body: JSON.stringify(data),
   })
-  .then(() => {
-    if(!validateUser(data)) {
-      loginForm.setAttribute('disabled');
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      loginMessage.textContent = "Error.  User already registered.";
+      loginMessage.classList.remove('remove');
+      console.log(data.error);
+    } else {
+      createButton.classList.add('hidden');
+      loginMessage.textContent = "User registered.  You may now login.";
+      loginMessage.classList.remove('remove');
+      console.log('Token created: ' + data.token);
     }
-    createButton.classList.add('hidden');
   })
 }
 
@@ -48,19 +56,23 @@ let loginUser = (event) => {
         referrer: "no-referrer", 
         body: JSON.stringify(data),
   })
-  .then(response => {
-      response.text().then(token => {
-        if(!response || !validateUser(data)) {
-          let message = document.querySelector('.show-message');
-          message.classList.remove('hidden');    
-          loginForm.setAttribute('disabled');
-        }
-        let message = document.querySelector('.show-message');
-        message.classList.add('hidden');    
-        localStorage.setItem("token", token);
-        loginForm.reset();
-        showInstructions();
-      })
+  .then(response => response.json()).then(data => {
+    if (data.error) {
+      loginMessage.textContent = "User could not login.  Check password.";
+      loginMessage.classList.remove('remove');
+      console.log(data.error);
+    } else {
+      localStorage.setItem("token", data.token);
+      loginForm.reset();
+      showInstructions();
+      loginMessage.classList.add('remove');
+    }
+  })
+  .catch(err => {
+    loginMessage.textContent = "Error accessing server.";
+    loginForm.reset();
+    loginMessage.classList.remove('remove');
+    console.log(err);
   })
 }
 
