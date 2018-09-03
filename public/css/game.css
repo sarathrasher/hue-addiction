@@ -44,6 +44,7 @@
   width: 20vh;
   height: 20vh;
   margin: 0.5vh;
+  position: relative;
 }
 
 @media (min-width: 425px) {

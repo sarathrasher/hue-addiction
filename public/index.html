@@ -29,7 +29,7 @@
   <div class="contents">
     <form class="login-form hidden" action="">
       <div class="login-message remove"></div>
-      <input class="login-email" type="email" placeholder="Email" required>
+      <input class="login-email" placeholder="Username" required>
       <input class="login-password" type="password" placeholder="Password" required>
       <input class="create-button button" type="submit" value="Create Account">
       <input class="login-button button" type="submit" value="Log In">
@@ -40,11 +40,17 @@
     </div>
     <div class="game hidden">
       <div class="score-time">
+        <div>
+          Total Score: <span class="total-score"></span> points
+        </div>
         <div class="score-ticker">
-          Score: <span class="score"></span> points
+          Level Score: <span class="score"></span> points
         </div>
         <div>
           Time: <span class="time"></span> seconds
+        </div>
+        <div>
+          Total Time: <span class="total-time"></span> seconds
         </div>
       </div>
       <div class="mixed-color"></div>
@@ -61,6 +67,9 @@
     <div class="stats hidden">
       <ul class="level-list list">
         <li class="level-number">
+          <a class="level-total" href="">Total</a>
+        </li>
+        <li class="level-number">
           <a class="level-link level-1" href="">1</a>
         </li>
         <li class="level-number">
@@ -73,6 +82,7 @@
           <a class="level-link level-4" href="">4</a>
         </li>
       </ul>
+      <h2 class="stats-heading"></h2>
       <div class="scores">
         <div class="score-sheet">
           <h3 class="score-header">Your Score</h3>
@@ -84,6 +94,22 @@
           <ul class="average-score-list list">
             <li class="average-score"></li>
             <li class="average-time"></li>
+          </ul>
+          <h3 class="score-header">Leaderboard</h3>
+          <ul class="leader1-score-list list">
+            <li class="leader1-name"></li>
+            <li class="leader1-score"></li>
+            <li class="leader1-time"></li>
+          </ul>
+          <ul class="leader2-score-list list">
+            <li class="leader2-name"></li>
+            <li class="leader2-score"></li>
+            <li class="leader2-time"></li>
+          </ul>
+          <ul class="leader3-score-list list">
+            <li class="leader3-name"></li>
+            <li class="leader3-score"></li>
+            <li class="leader3-time"></li>
           </ul>
         </div>
       </div>
