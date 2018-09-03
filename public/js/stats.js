@@ -23,19 +23,19 @@ let insertStatsData = (level, data) => {
   }
   let statsObject = data;
   let averageScoreContent = statsObject.average.score;
-  averageScore.textContent = `Average score: ${averageScoreContent}`;
+  averageScore.textContent = averageScoreContent;
 
   let averageTimeContent = statsObject.average.time;
   console.log(averageTimeContent)
-  averageTime.textContent = `Average time: ${averageTimeContent}`;
+  averageTime.textContent = averageTimeContent;
 
   let personalScoreContent = statsObject.user.score;
   console.log(personalScoreContent)
-  personalScore.textContent = `Your score: ${personalScoreContent}`;
+  personalScore.textContent = personalScoreContent;
 
   let personalTimeContent = statsObject.user.time;
   console.log(personalTimeContent)
-  personalTime.textContent = `Your time: ${personalTimeContent}`;
+  personalTime.textContent = personalTimeContent;
 
   let leader1NameContent = statsObject.leaders[0].email;
   console.log(leader1NameContent)
@@ -43,11 +43,11 @@ let insertStatsData = (level, data) => {
 
   let leader1ScoreContent = statsObject.leaders[0].score;
   console.log(leader1ScoreContent)
-  leader1Score.textContent = `Score: ${leader1ScoreContent}`;
+  leader1Score.textContent = leader1ScoreContent;
 
   let leader1TimeContent = statsObject.leaders[0].time;
   console.log(leader1TimeContent)
-  leader1Time.textContent = `Time: ${leader1TimeContent}`;
+  leader1Time.textContent = leader1TimeContent;
 
   let leader2NameContent = statsObject.leaders[1].email;
   console.log(leader2NameContent)
@@ -55,11 +55,11 @@ let insertStatsData = (level, data) => {
 
   let leader2ScoreContent = statsObject.leaders[1].score;
   console.log(leader2ScoreContent)
-  leader2Score.textContent = `Score: ${leader2ScoreContent}`;
+  leader2Score.textContent = leader2ScoreContent;
 
   let leader2TimeContent = statsObject.leaders[1].time;
   console.log(leader2TimeContent)
-  leader2Time.textContent = `Time: ${leader2TimeContent}`;
+  leader2Time.textContent = leader2TimeContent;
 
   let leader3NameContent = statsObject.leaders[2].email;
   console.log(leader3NameContent)
@@ -67,11 +67,11 @@ let insertStatsData = (level, data) => {
 
   let leader3ScoreContent = statsObject.leaders[2].score;
   console.log(leader3ScoreContent)
-  leader3Score.textContent = `Score: ${leader3ScoreContent}`;
+  leader3Score.textContent = leader3ScoreContent;
 
   let leader3TimeContent = statsObject.leaders[2].time;
   console.log(leader3TimeContent)
-  leader3Time.textContent = `Time: ${leader3TimeContent}`;
+  leader3Time.textContent = leader3TimeContent;
 };
 
 let fetchScores = (stage, level) => {

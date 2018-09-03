@@ -11,13 +11,21 @@
   margin-top: 4em;
 }
 
+.stats-heading {
+  padding-top: 1em;
+}
+/* 
 .scores {
   margin-top: 2em;
-}
+} */
 
 .score-header {
   text-transform: uppercase;
   margin-top: 1em;
+}
+
+.score-table-header {
+  width: 35vh;
 }
 
 .list {
@@ -45,4 +53,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.leaderboard-header-name {
+  width: 35vh;
+}
+
+.leaderboard-header-score {
+  width: 35vh;
 }
