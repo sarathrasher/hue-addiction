@@ -11,6 +11,7 @@ let showInstructions = () => {
   let instructions = document.querySelector(".instructions");
   let navBar = document.querySelector('.nav');
   let statsPage = document.querySelector('.stats');
+  statsPage.classList.add('hidden');
   navBar.classList.remove('remove');
   form.classList.add("hidden");
   let logoutLink = document.querySelector('.nav-logout');
