@@ -26,6 +26,9 @@ let getGameDataByLevel = (req, res) => {
     let leaders = data[2];
     res.send({user, average, leaders});
   })
+  .catch(err => {
+    res.send({error: err});
+  })
 }
 
 let postGameData = (req, res) => {

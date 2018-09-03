@@ -118,6 +118,8 @@ let logOut = () => {
   game.classList.add('hidden');
   let instructions = document.querySelector('.instructions');
   instructions.classList.add('hidden');
+  let stats = document.querySelector('.stats');
+  stats.classList.add('hidden');
   loginForm.classList.remove('hidden');
   let navBar = document.querySelector('.nav');
   navBar.classList.add('hidden');

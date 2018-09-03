@@ -63,7 +63,7 @@ let fetchLevelData = level => {
         scoreDisplay.textContent = score;
       }
     }, 200);
-    totalScoreDisplay = totalScore;
+    totalScoreDisplay.textContent = totalScore;
     // Starting time
     time = 0;
     timeDisplay.textContent = time;
@@ -197,6 +197,7 @@ interact('.play-color').dropzone({
             time
           };
           sendLevelData(levelData);
+          showStatsButton();
           showStats();
           resetGame();
           return;
