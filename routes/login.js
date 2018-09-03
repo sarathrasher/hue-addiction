@@ -1,7 +1,6 @@
 const db = require("../database");
 const jwt = require("jsonwebtoken");
 const {password} = require('../secrets');
-const bcrypt = require('bcryptjs');
 
 let createUser = (req, res, next) => {
   let newUser = {
@@ -16,9 +15,12 @@ let createUser = (req, res, next) => {
   )
   .then(data => {
     let token = jwt.sign({ id: data.id }, password, { expiresIn: "1d" });
-    res.send(token);
+    res.send({token});
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+    console.log(err);
+    res.send({error: err});
+  });
 };
 
 let validateToken = async (req, res, next) => {
@@ -58,11 +60,11 @@ let loginUser = (req, res, next) => {
   .then(data => {
     console.log(data);
     let token = jwt.sign({ id: data.id }, password, { expiresIn: "1d" });
-    res.send(token);
+    res.send({token});
   })
   .catch(err => {
     console.log(err);
-    res.end('Not authorized');
+    res.send({error: err});
   });
 };
 

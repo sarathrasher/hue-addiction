@@ -6,6 +6,8 @@
 let createButton = document.querySelector('.create-button');
 let loginButton = document.querySelector('.login-button');
 let loginForm = document.querySelector('.login-form');
+let logOutBtn = document.querySelector('.nav-link-logout');
+let loginMessage = document.querySelector('.login-message');
 
 let createUser = (event) => {
   event.preventDefault();
@@ -23,8 +25,18 @@ let createUser = (event) => {
         referrer: "no-referrer", 
         body: JSON.stringify(data),
   })
-  .then(response => {
-    createButton.classList.add('hidden');
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      loginMessage.textContent = "Error.  User already registered.";
+      loginMessage.classList.remove('remove');
+      console.log(data.error);
+    } else {
+      createButton.classList.add('hidden');
+      loginMessage.textContent = "User registered.  You may now login.";
+      loginMessage.classList.remove('remove');
+      console.log('Token created: ' + data.token);
+    }
   })
 }
 
@@ -44,12 +56,23 @@ let loginUser = (event) => {
         referrer: "no-referrer", 
         body: JSON.stringify(data),
   })
-  .then(response => {
-      response.text().then(token => {
-        localStorage.setItem("token", token);
-        loginForm.reset();
-        showInstructions();
-      })
+  .then(response => response.json()).then(data => {
+    if (data.error) {
+      loginMessage.textContent = "User could not login.  Check password.";
+      loginMessage.classList.remove('remove');
+      console.log(data.error);
+    } else {
+      localStorage.setItem("token", data.token);
+      loginForm.reset();
+      showInstructions();
+      loginMessage.classList.add('remove');
+    }
+  })
+  .catch(err => {
+    loginMessage.textContent = "Error accessing server.";
+    loginForm.reset();
+    loginMessage.classList.remove('remove');
+    console.log(err);
   })
 }
 
@@ -87,7 +110,22 @@ let automaticSignIn = () => {
     showLogin();
   }
 }
+
+let logOut = () => {
+  event.preventDefault();
+  localStorage.removeItem("token");
+  let game = document.querySelector('.game');
+  game.classList.add('hidden');
+  let instructions = document.querySelector('.instructions');
+  instructions.classList.add('hidden');
+  loginForm.classList.remove('hidden');
+  let navBar = document.querySelector('.nav');
+  navBar.classList.add('hidden');
+  resetGame();
+};
+
 createButton.addEventListener('click', createUser);
 loginButton.addEventListener('click', loginUser);
+logOutBtn.addEventListener("click",logOut);
 automaticSignIn();
 
