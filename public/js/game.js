@@ -5,12 +5,14 @@ let score;
 let time;
 let scoreDisplay = document.querySelector('.score');
 let timeDisplay = document.querySelector('.time');
-let scoreTimer;
+let scoreTimer, timeTimer;
 
 let resetGame = () => {
   level = 1;
   stage = 1;
   score = 100;
+  scoreTimer && clearInterval(scoreTimer);
+  timeTimer && clearInterval(timeTimer);
 }
 
 resetGame();
