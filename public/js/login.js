@@ -13,6 +13,11 @@ let createUser = (event) => {
   event.preventDefault();
   let email = document.querySelector('.login-email').value;
   let password = document.querySelector('.login-password').value;
+  if (email.length < 2 || password.length < 2) {
+    loginMessage.textContent = "Error.  Please make sure your username and password are more than two characters long.";
+    loginMessage.classList.remove('remove');
+    return;
+  }
   let data ={email: email, user_password: password};
   fetch('/users', {
     method: "POST", 
@@ -32,7 +37,7 @@ let createUser = (event) => {
       loginMessage.classList.remove('remove');
       console.log(data.error);
     } else {
-      createButton.classList.add('hidden');
+      createButton.classList.add('remove');
       loginMessage.textContent = "User registered.  You may now login.";
       loginMessage.classList.remove('remove');
       console.log('Token created: ' + data.token);
@@ -44,6 +49,11 @@ let loginUser = (event) => {
   event.preventDefault();
   let email = document.querySelector('.login-email').value;
   let password = document.querySelector('.login-password').value;
+  if (email.length < 2 || password.length < 2) {
+    loginMessage.textContent = "Error.  Please make sure your username and password are more than two characters long.";
+    loginMessage.classList.remove('remove');
+    return;
+  }
   let data ={email: email, user_password: password};
   fetch('/login', {
     method: "POST", 
@@ -120,7 +130,8 @@ let logOut = () => {
   instructions.classList.add('hidden');
   loginForm.classList.remove('hidden');
   let navBar = document.querySelector('.nav');
-  navBar.classList.add('hidden');
+  navBar.classList.add('remove');
+  createButton.classList.remove('remove');
   resetGame();
 };
 
