@@ -7,12 +7,14 @@ let totalScoreDisplay = document.querySelector('.total-score');
 let scoreDisplay = document.querySelector('.score');
 let timeDisplay = document.querySelector('.time');
 let totalTimeDisplay = document.querySelector('.total-time');
-let scoreTimer;
+let scoreTimer, timeTimer;
 
 let resetGame = () => {
   level = 1;
   stage = 1;
   score = 100;
+  scoreTimer && clearInterval(scoreTimer);
+  timeTimer && clearInterval(timeTimer);
   totalScore = 0;
   totalTime = 0;
 }
