@@ -33,6 +33,13 @@
   width: 50%;
 }
 
+.level-link, .level-total {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .score-sheet {
   display: flex;
   flex-direction: column;
