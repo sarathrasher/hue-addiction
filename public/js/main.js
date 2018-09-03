@@ -13,7 +13,8 @@ let showInstructions = () => {
   let statsPage = document.querySelector('.stats');
   navBar.classList.remove('hidden');
   form.classList.add("hidden");
-  statsPage.classList.add('hidden');
+  let logoutLink = document.querySelector('.nav-logout');
+  logoutLink.classList.remove('logout-remove')
   instructions.classList.remove("hidden");
   return instructions;
 };
