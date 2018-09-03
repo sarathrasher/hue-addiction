@@ -186,7 +186,7 @@ interact('.play-color').dropzone({
         resetElement(event.relatedTarget);
         event.relatedTarget.classList.remove('hidden');
         feedbackDisplay.textContent = '';
-        if (level > 4) {
+        if (level > 10) {
           level = 0;  // Send total game data to level = 0
           score = totalScore;
           time = totalTime;
