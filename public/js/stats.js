@@ -85,7 +85,11 @@ let fetchScores = (stage, level) => {
     return res.json();
   })
   .then(data => {
-    insertStatsData(level, data);  // Level 0 stores total scores/times.
+    if (data.error) {
+      statsHeading.textContent = 'Error Retrieving Stats :(';
+    } else {
+      insertStatsData(level, data);  // Level 0 stores total scores/times.
+    }
     console.log(data);
   })
 };
@@ -103,7 +107,35 @@ for (levelLink of levelLinks) {
   });
 }
 
+let hideStatsButton = () => {
+  let statsButton = document.querySelector('.nav-stats');
+  statsButton.classList.add('remove');
+}
 
+let showStatsButton = () => {
+  let statsButton = document.querySelector('.nav-stats');
+  statsButton.classList.remove('remove');
+}
+
+let checkScores = (stage, level) => {
+  let token = localStorage.getItem("token");
+  fetch(`/api/game_data/${stage}/${level}`,  {
+    headers: {
+      "token": token
+    }
+  }).then(res => {
+    return res.json();
+  })
+  .then(data => {
+    if (data.error) {
+      hideStatsButton();
+    } else {
+      showStatsButton();
+    }
+  })
+};
+
+checkScores(1, 0);
 
 
 
