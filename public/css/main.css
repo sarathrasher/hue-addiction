@@ -134,3 +134,7 @@ body {
 .remove {
   display: none;
 }
+
+.bold {
+  font-weight: bold;
+}
