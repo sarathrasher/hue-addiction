@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2em auto;
+  margin: 1em auto;
   width: 15em;
   border: solid 0.3em black;
   padding: 1em;
@@ -22,13 +22,3 @@
   padding: 0.2em;
 }
 
-.create-button, .login-button {
-  margin: 0.5em 0.5em 0;
-  padding: 0.3em 0.6em;
-  font-size: 1.25rem;
-  color: #FFF;
-  text-decoration: none;
-  border: 0;
-  cursor: pointer;
-  background: black;
-}
