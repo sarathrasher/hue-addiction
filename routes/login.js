@@ -1,7 +1,6 @@
 const db = require("../database");
 const jwt = require("jsonwebtoken");
 const {password} = require('../secrets');
-const bcrypt = require('bcryptjs');
 
 let createUser = (req, res, next) => {
   let newUser = {

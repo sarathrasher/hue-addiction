@@ -72,8 +72,6 @@ let insertStatsData = (level, data) => {
   let leader3TimeContent = statsObject.leaders[2].time;
   console.log(leader3TimeContent)
   leader3Time.textContent = `Time: ${leader3TimeContent}`;
-
-  
 };
 
 let fetchScores = (stage, level) => {
