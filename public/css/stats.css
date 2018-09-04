@@ -8,11 +8,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  margin-top: 4em;
+  margin-top: 1em;
 }
 
 .stats-heading {
-  padding-top: 1em;
+  margin: 0;
 }
 /* 
 .scores {
@@ -20,12 +20,8 @@
 } */
 
 .score-header {
-  text-transform: uppercase;
-  margin-top: 1em;
-}
-
-.score-table-header {
-  width: 35vh;
+  font-variant: small-caps;
+  margin: 0.5em 0.5em 0.25em;
 }
 
 .list {
@@ -35,17 +31,29 @@
 }
 
 .level-list {
+  flex-shrink: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 50%;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100%;
+  padding: 2% 0;
+  margin-top: 0.5em;
+  box-sizing: border-box;
 }
 
 .level-link, .level-total {
   text-decoration: none;
-  color: #000;
   font-weight: bold;
   cursor: pointer;
+  color: #000;
+}
+.level-link:hover, .level-total:hover {
+  color: red;
+}
+
+.scores {
+  width: 100%;
 }
 
 .score-sheet {
@@ -55,10 +63,9 @@
   justify-content: center;
 }
 
-.leaderboard-header-name {
-  width: 35vh;
+.personal-score-table, .average-score-table, .leaderboard-table {
+  text-align: center;
 }
-
-.leaderboard-header-score {
-  width: 35vh;
+.personal-score-table td, .average-score-table td, .leaderboard-table td {
+  padding: 0 1em;
 }
