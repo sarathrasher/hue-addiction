@@ -8,6 +8,7 @@
   height: 100%;
   top: 0;
   left: 0;
+  box-sizing: border-box;
 }
 .feedback {
   height: 2.5em;
@@ -19,8 +20,9 @@
   width: 100%;
   text-align: center;
   display: flex;
-  margin: 0.5em;
+  padding: 0.5em;
   justify-content: space-around;
+  box-sizing: border-box;
 }
 
 .mixed-color {
