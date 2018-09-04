@@ -40,7 +40,12 @@ The built-in HTML5 Drag and Drop API was unsuitable for this project because it 
 
 We decided to solve this problem by using a library.  We looked at several other libraries that were lacking in documentation and sample code, until we found one called [interact.js] (http://interactjs.io/).  The library allows you to drag and drop objects directly, instead of by creating a ghost image.  It is well-documented with example code that was easy to follow. 
 
-We ran into issues on mobile, even though their examples worked on their site.  Even directly copying and pasting their example resulted in an inability to drag the draggable elements more than a few pixels at a time.  The solution was to turn off a css attribute called touch-events on the draggable elements.
+We ran into issues on mobile, even though their examples worked on their site.  Even directly copying and pasting their example resulted in an inability to drag the draggable elements more than a few pixels at a time.  The solution was to turn off a css attribute called touch-events on the draggable elements, as seen below:
+
+```CSS
+  -ms-touch-action: none;
+  touch-action: none;
+```
 
 # Scoring
 The scoring system takes advantage of built-in timers using setInterval and clearInterval.  When a level starts the setInterval method is called and stored in a variable.  When a level was finished, clearInterval had to be called on the stored variable.  This led to some bugs.  For example, our logout button caused a bug where the timers continued to run and the score glitched.  The solution was to call clearInterval whenever the game needed to be reset.
