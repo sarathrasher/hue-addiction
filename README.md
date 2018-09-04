@@ -1,9 +1,9 @@
 # Color Addiction
 Most of the time, if an artist wants to experiment with color mixing, they have to buy supplies and physically mix colors. Color Addiction allows users to exercise their color blending skills in a fast-paced, fun, virtual environment. Users are challenged each level to drag and drop colored game peices that combine to match a given color for each level. Score is calculated based on the amount of tries you take and the amount of time it takes for you to reach the correct match. 
 
-### [Trello Board] (https://trello.com/b/Ktjz0atK/color-addiction)
+[Trello Board] (https://trello.com/b/Ktjz0atK/color-addiction)
 
-### [Live Demo] (http://ec2-18-191-148-7.us-east-2.compute.amazonaws.com/)
+[Live Demo] (http://ec2-18-191-148-7.us-east-2.compute.amazonaws.com/)
 
 # Color Mixing
 There are two main forms of color mixing: additive and subtractive. 
@@ -36,7 +36,14 @@ authRouter.post('/game_data', gameRoutes.postGameData);
 As can be seen, before making requests to fetch any of the game data, it must pass through the validateToken middleware assigned to the authorized router.
 
 # Drag and Drop
+The built-in HTML5 Drag and Drop API was unsuitable for this project because it creates a ghost image when elements are dragged.  The ghost image has built-in transparency, which would allow you to see the colors mixing before dropping them.
+
+We decided to solve this problem by using a library.  We looked at several other libraries that were lacking in documentation and sample code, until we found one called [interact.js] (http://interactjs.io/).  The library allows you to drag and drop objects directly, instead of by creating a ghost image.  It is well-documented with example code that was easy to follow. 
+
+We ran into issues on mobile, even though their examples worked on their site.  Even directly copying and pasting their example resulted in an inability to drag the draggable elements more than a few pixels at a time.  The solution was to turn off a css attribute called touch-events on the draggable elements.
 
 # Scoring
+The scoring system takes advantage of built-in timers using setInterval and clearInterval.  When a level starts the setInterval method is called and stored in a variable.  When a level was finished, clearInterval had to be called on the stored variable.  This led to some bugs.  For example, our logout button caused a bug where the timers continued to run and the score glitched.  The solution was to call clearInterval whenever the game needed to be reset.
 
 # Deploying to AWS
+We deployed to AWS.  The only issue we ran into was that our fetch requests broke.  We had to change our fetch requests to relative paths, because the absolute path to localhost would break on a user's remote machine.
