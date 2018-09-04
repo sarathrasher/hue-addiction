@@ -6,19 +6,19 @@ Most of the time, if an artist wants to experiment with color mixing, they have 
 [Live Demo](http://ec2-18-191-148-7.us-east-2.compute.amazonaws.com/)
 
 ### Technologies Used
-*HTML
-*CSS
-*JavaScript
-*jQuery
-*Node.js
-*PostgreSQL
-*Interact.js
-*Color_mix.js
+* HTML
+* CSS
+* JavaScript
+* jQuery
+* Node.js
+* PostgreSQL
+* Interact.js
+* Color_mix.js
 
 ### Contributors
-*Matheus Duarte
-*Ian Gornall
-*Sara Muntean
+* Matheus Duarte
+* Ian Gornall
+* Sara Muntean
 
 # Color Mixing
 There are two main forms of color mixing: additive and subtractive. 
