@@ -11,7 +11,7 @@ let loginMessage = document.querySelector('.login-message');
 
 let createUser = (event) => {
   event.preventDefault();
-  let email = document.querySelector('.login-email').value;
+  let email = document.querySelector('.login-email').value; // Add toLowerCase
   let password = document.querySelector('.login-password').value;
   if (email.length < 2 || password.length < 2) {
     loginMessage.textContent = "Error.  Please make sure your username and password are more than two characters long.";
@@ -47,7 +47,7 @@ let createUser = (event) => {
 
 let loginUser = (event) => {
   event.preventDefault();
-  let email = document.querySelector('.login-email').value;
+  let email = document.querySelector('.login-email').value; // add toLowerCase
   let password = document.querySelector('.login-password').value;
   if (email.length < 2 || password.length < 2) {
     loginMessage.textContent = "Error.  Please make sure your username and password are more than two characters long.";
